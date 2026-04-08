@@ -1,5 +1,9 @@
 name: build graalvm
 
+permissions:
+  contents: read
+  packages: write
+
 on:
   push:
     branches: [ "master" ]
@@ -49,13 +53,22 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Resolve image name
+        id: image
+        shell: bash
+        run: |
+          owner="${GITHUB_REPOSITORY_OWNER,,}"
+          repo="${GITHUB_REPOSITORY#*/}"
+          repo="${repo,,}"
+          echo "image=ghcr.io/${owner}/${repo}" >> "$GITHUB_OUTPUT"
+
       - name: Docker meta
         id: meta_graalvm
         uses: docker/metadata-action@v4
         with:
           # list of Docker images to use as base name for tags
           images: |
-            ghcr.io/langduamc/pterodactyl-graalvm
+            ${{ steps.image.outputs.image }}
           # generate Docker tags based on the following events/attributes
           tags: |
             type=raw,${{ matrix.tag }}
