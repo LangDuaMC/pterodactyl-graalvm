@@ -15,4 +15,6 @@ Currently, predefined flags list are:
 
 ## Predefined Docker pull list for egg
 
-I've generated a convention list in `eggtags.sh`, which you could put into egg Docker image list
+Run `bash eggtags.sh` to generate the image entry for a Pterodactyl egg. The workflow publishes only `25-OC`, which includes Oracle GraalVM 25.0.5.1 for [Java4Shell (CVE-2026-114938)](https://www.cve.org/CVERecord?id=CVE-2026-114938). Historical tags were not rebuilt for this update.
+
+Pull the updated `25-OC` image and recreate existing containers to use the patched runtime.

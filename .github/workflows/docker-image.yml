@@ -18,22 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         tag:
-          - 11
-          - 17
-          - 19
-          - 17-JDK
-          - 20-JDK
-          - 21-JDK
-          - 21-temurin
-          - 22-JDK
-          - 11-EE
-          - 17-EE
-          - 19-EE
-          - 22-OC
-          - 23-OC
           - 25-OC
-          - 22-temurin
-          - 23-temurin
     steps:
       - name: Checkout
         uses: actions/checkout@v3
